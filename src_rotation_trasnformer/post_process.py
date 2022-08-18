@@ -56,33 +56,15 @@ def combine_output(config, exp_path, pattern='y_*.pt', out_name='y.pt'):
     return y,X,y_true
 
 
-def process_output(y,X,y_true,obj_fn, init_examples, mode='max'):
+def process_output(y,obj_fn, init_examples, mode='max'):
     # diff = torch.abs(y - obj_fn.true_opt_value)
     # print(y)
     if mode=='min':
-        cum_res, indices = torch.cummin(y, dim=0)
-        # print(cum_res)
-        # print(X[indices[:,:,1].squeeze(dim=-1),:,1])
-        # print(obj_fn.forward_true(X[indices[:,:,100].squeeze(dim=-1),:,100]))
-        # print(indices[:,:,0].squeeze(dim=-1))
+        cum_res, indices = torch.cummin(-y, dim=0)
     elif mode=='max':
         cum_res, indices = torch.cummax(y, dim=0)
     else:
         raise NotImplementedError
-
-    # for i in range(indices.shape[2]):
-    #     # print(i)
-    #     y_true[:,:,i] = obj_fn.forward_true(X[indices[:,:,i].squeeze(dim=-1),:,i]).unsqueeze(dim=-1)
-        # print(obj_fn.forward_true(X[indices[:,:,i].squeeze(dim=-1),:,i]).unsqueeze(dim=-1))
-        # print(X[indices[:,:,i].squeeze(dim=-1),:,i].shape)
-    
-    # print(y_true)
-    # y_true = cum_res
-    # regret = torch.log10(torch.abs(y_true-obj_fn.true_opt_value))
-    # mean_regret = regret.mean(dim=-1).detach()[init_examples:, 0]
-    # std_regret = regret.std(dim=-1).detach()[init_examples:, 0]
-
-    # print(y_true.shape,y_true)
     y_true = cum_res
     mean_regret = y_true.mean(dim=-1).detach()[:, 0]
     std_regret = y_true.std(dim=-1).detach()[:, 0]
@@ -115,18 +97,10 @@ for exp in os.listdir(args.exps_dir):
 
         obj_fn = build_obj_func(config)
 
-        y,X,y_true = combine_output(config, exp_path)
-        # print('X:',X)
-        # print('y:',y)
-
-        # y = torch.load(os.path.join(exp_path, 'y.pt'))
-
-        mean_regret, std_regret = process_output(y,X,y_true, obj_fn,
+        y = torch.load(os.path.join(exp_path, 'y.pt'))
+        mean_regret, std_regret = process_output(y, obj_fn,
             config['init_examples'], mode=config['max/min'])
-        # mean_regret, std_regret = process_output(y, obj_fn,
-        #     config['init_examples'], mode=config['max/min'])
         x_vals = range(1, mean_regret.shape[0] + 1)
-        # x_vals = range(1, 26)
 
         _,_,bars = plt.errorbar(x_vals, mean_regret, 0.1*std_regret,
             linestyle = 'solid', label=config['experiment_name'])
@@ -145,8 +119,7 @@ for exp in os.listdir(args.exps_dir):
 # plt.title(str(obj_fn).replace("()","")+':\nlow:'+str(obj_fn.low)+'\nhigh:'+str(obj_fn.high))
 plt.legend()
 plt.xlabel(args.xlabel)
-plt.ylabel(args.ylabel)
-# plt.xlabel('Number of iterations')
-plt.ylabel('Mean Episodic reward')
+# plt.ylabel(args.ylabel)
+plt.ylabel('Mean validation loss')
 plt.savefig(os.path.join(args.exps_dir, 'Regret_plot.png'))
 # plt.savefig(os.path.join(args.exps_dir, 'y_true.png'))
