@@ -20,23 +20,23 @@ le_branke: basic
 
 all: basic
 	./run.sh branin min 2 $(ARGS)
-# # # python3 post_process.py -e $(EXPDIR)/branin/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/branin/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # levy: basic
 	./run.sh levy min 4 $(ARGS)
-# # # # python3 post_process.py -e $(EXPDIR)/levy/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/levy/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # # rosenbrock: basic
 	./run.sh rosenbrock min 4 $(ARGS)
-# # # # # # python3 post_process.py -e $(EXPDIR)/rosenbrock/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/rosenbrock/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # # # # ackley: basic
 	./run.sh ackley min 5 $(ARGS)
-# # # # # # # python3 post_process.py -e $(EXPDIR)/ackley/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/ackley/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # # # # # hartmann: basic
 	./run.sh hartmann min 6 $(ARGS)
-# # # # # python3 post_process.py -e $(EXPDIR)/hartmann/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/hartmann/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # # # powell: basic
 # # # 	./run.sh powell min 7 $(ARGS)
@@ -55,7 +55,7 @@ all: basic
 # # # # ./run.sh gw max 104 $(ARGS)
 # # # # Cosine8: basic
 	./run.sh Cosine8 max 8 $(ARGS)
-# # # python3 post_process.py -e $(EXPDIR)/Cosine8/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/Cosine8/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # # # Drop_Wave: basic
 # # #	./run.sh Drop_Wave min 2 $(ARGS)
@@ -63,11 +63,11 @@ all: basic
 
 # # # StyblinskiTang: basic
 	./run.sh StyblinskiTang min 4 $(ARGS)
-# # python3 post_process.py -e $(EXPDIR)/StyblinskiTang/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/StyblinskiTang/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # DixonPrice: basic
 	./run.sh DixonPrice min 5 $(ARGS)
-# # python3 post_process.py -e $(EXPDIR)/DixonPrice/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
+	python3 post_process.py -e $(EXPDIR)/DixonPrice/ -s 0.1 -x Number\ of\ Iterations -y Mean\ Regret
 
 # SixHumpCamel: basic
 #	./run.sh SixHumpCamel min 2 $(ARGS)
