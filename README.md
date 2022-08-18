@@ -53,6 +53,6 @@ To run all standard test function experiments use command:<br />
 <br />
 This will start the experiments for all the test_functions.
 
-**Libraries required to run the code include botorch,openMPI,numpy,pandas,pyprch which are thoroughly used all over the code.**
+**Libraries required to run the code include botorch, openMPI, numpy, pandas, pytorch which are thoroughly used all over the code.**
 
 
