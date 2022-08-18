@@ -23,40 +23,36 @@ For installing the repository use the command below in your terminal.<br>
 ## Description
 ### src_RL:
 This folder consists of all the Reinforcement Learning files and once run and properly set will give RL results.<br />
-To run all RL experiments use command:
+To run all RL experiments use command:<br />
 <code>
 <blink>
     make all  
 </blink>
 </code>
+<br />
 This will start the experiments for RL.
 
+### src_hyper_parameter_optimization:
+This folder consists of all the hyperparameter optimization files and once run and properly set will give hyperparameter optimization results.<br />
+To run all hyperparameter experiments use command:<br />y
+<code>
+<blink>
+    make all  
+</blink>
+</code>
+<br />
+This will start the experiments for all the hyperparameter experiments.
+### src_test_funcions:
+This folder consists of all the standard test_functions files and once run and properly set will give test_function results.<br />
+To run all standard test function experiments use command:<br />
+<code>
+<blink>
+    make all  
+</blink>
+</code>
+<br />
+This will start the experiments for all the test_functions.
 
-**Libraries required to run the code include numpy,scikit,keras,Imageio and matplotlib which are thoroughly used all over the code.**
+**Libraries required to run the code include botorch,openMPI,numpy,pandas,pyprch which are thoroughly used all over the code.**
 
-### Problem4&5:
-In this part of the excercise we had to use our own sample RGB image and use the incomplete data to reconstruct the image and compare them.<br />
-Steps to follow if you want to test on your own sample image.
-* First follow the installation step to clone the repository.
-* Now, use the problem4&5 folder to access code for testing on your own sample image.
-The folder consists of:
-  * create_random_indices.ipynb
-  * combine_comp.ipynb
-  * Get_corrupted.ipynb
-  * Sample images
-  * img.Png
-  * R
-  * G
-  * B
-* Select a 100X100 pixel image (otherwise PC might crash) and use create_random_indices.ipynb to select randomly some pixels which you want to retain in incomplete image.
-* Folders R,G,B are used to do reconstruction separately for Red,Green and Blue components respectively.Each of them contains two files create_data.ipynb and recons.ipynb.
-* One by one use create data for obtaining incomplete matrices to be used in recons.ipynb to reconstruct image.
-* Firstly create data and then use recons for each R,G,B for obtaing reconstructed image of that particular component.
-* Check the R,G,B folders once execution complete.If a new folder 'data for assignment' has been created and file with extension .npy is created then execution is successful.
-* Now for the final step use comine_comp.ipynb to combine all components into one image and compare with the final image.
-* Sample_images contains reconstructed images used as a reference:
-  * reconstruct_0.4.png - reconstructed image when corruption 40%
-  * reconstruct_0.7.png - reconstructed image when corruption 70%
-* img.png is the sample image used for reconstruction.
 
-**NOTE:Change path variable according to your files in order for the code to work properly.**
