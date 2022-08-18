@@ -57,35 +57,20 @@ def combine_output(config, exp_path, pattern='y_*.pt', out_name='y.pt'):
 
 
 def process_output(y,X,y_true,obj_fn, init_examples, mode='max'):
-    # diff = torch.abs(y - obj_fn.true_opt_value)
-    # print(y)
     if mode=='min':
         cum_res, indices = torch.cummin(y, dim=0)
-        # print(cum_res)
-        # print(X[indices[:,:,1].squeeze(dim=-1),:,1])
-        # print(obj_fn.forward_true(X[indices[:,:,100].squeeze(dim=-1),:,100]))
-        # print(indices[:,:,0].squeeze(dim=-1))
     elif mode=='max':
         cum_res, indices = torch.cummax(y, dim=0)
     else:
         raise NotImplementedError
 
-    # for i in range(indices.shape[2]):
-    #     # print(i)
-    #     y_true[:,:,i] = obj_fn.forward_true(X[indices[:,:,i].squeeze(dim=-1),:,i]).unsqueeze(dim=-1)
-        # print(obj_fn.forward_true(X[indices[:,:,i].squeeze(dim=-1),:,i]).unsqueeze(dim=-1))
-        # print(X[indices[:,:,i].squeeze(dim=-1),:,i].shape)
+    for i in range(indices.shape[2]):
+        y_true[:,:,i] = obj_fn.forward_true(X[indices[:,:,i].squeeze(dim=-1),:,i]).unsqueeze(dim=-1)
     
-    # print(y_true)
-    # y_true = cum_res
-    # regret = torch.log10(torch.abs(y_true-obj_fn.true_opt_value))
-    # mean_regret = regret.mean(dim=-1).detach()[init_examples:, 0]
-    # std_regret = regret.std(dim=-1).detach()[init_examples:, 0]
-
-    # print(y_true.shape,y_true)
     y_true = cum_res
-    mean_regret = y_true.mean(dim=-1).detach()[:, 0]
-    std_regret = y_true.std(dim=-1).detach()[:, 0]
+    regret = torch.log10(torch.abs(y_true-obj_fn.true_opt_value))
+    mean_regret = regret.mean(dim=-1).detach()[init_examples:, 0]
+    std_regret = regret.std(dim=-1).detach()[init_examples:, 0]
 
     return mean_regret, std_regret
 
@@ -146,7 +131,5 @@ for exp in os.listdir(args.exps_dir):
 plt.legend()
 plt.xlabel(args.xlabel)
 plt.ylabel(args.ylabel)
-# plt.xlabel('Number of iterations')
-plt.ylabel('Mean Episodic reward')
 plt.savefig(os.path.join(args.exps_dir, 'Regret_plot.png'))
 # plt.savefig(os.path.join(args.exps_dir, 'y_true.png'))
