@@ -11,6 +11,9 @@ class PrabuAcquistionFunction(AnalyticAcquisitionFunction):
         This class implements the acquisition function where we want to
         minimize the expectation of the modulus of the gradient of the
         objective function in a particular direction.
+        
+        This class implements the FOBO algorithm by Prabuchandran et al. 
+        2021.
     '''
     def __init__(self, model: Model, maximize: bool = False) -> None:
         ''' 
