@@ -42,7 +42,7 @@ To run all hyperparameter experiments use command:<br />y
 </code>
 <br />
 This will start the experiments for all the hyperparameter experiments.
-### src_test_funcions:
+### src_test_functions:
 This folder consists of all the standard test_functions files and once run and properly set will give test_function results.<br />
 To run all standard test function experiments use command:<br />
 <code>
